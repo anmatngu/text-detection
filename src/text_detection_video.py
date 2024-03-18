@@ -3,7 +3,7 @@ import easyocr
 import matplotlib.pyplot as plt
 import numpy as np
 
-reader = easyocr.Reader(['en', 'vi'], gpu=True)
+reader = easyocr.Reader(['en'], gpu=True)
 
 def detect_text(cap, threshold=0.25, font=cv2.FONT_HERSHEY_SIMPLEX):
     while True:
