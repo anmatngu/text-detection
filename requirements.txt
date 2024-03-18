@@ -1,0 +1,5 @@
+easyocr
+numpy
+opencv-python
+matplotlib
+torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
