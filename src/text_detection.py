@@ -24,15 +24,3 @@ def detect_text(image_path, language='en', threshold=0.25):
     cv2.imshow('Text Detection Result', img)
     cv2.waitKey(0)  # Wait for a key press to close the window
     cv2.destroyAllWindows()
-
-
-# Example usage
-if __name__ == "__main__":
-    image_path = 'images/'
-    image_name = str(input('Input your image name (with file extension): '))
-    language = 'en'
-
-    # Detect text in the image
-    text_data = detect_text(image_path + image_name, language)
-
-    detect_text(image_path, language, threshold=0.25)
