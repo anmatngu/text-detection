@@ -3,19 +3,6 @@ import easyocr
 import numpy as np
 
 def detect_text(image_path, language='en', threshold=0.25):
-    """
-    Detects text in an image using EasyOCR.
-
-    Args:
-        image_path (str): Path to the image file.
-        language (str, optional): The language code for text detection. Defaults to 'en'.
-
-    Returns:
-        list: A list of detected text objects. Each object is a dictionary with keys:
-        - bbox: Bounding box coordinates of the text region.
-        - text: Detected text content.
-        - score: Confidence score of the detection.
-    """
     # Initialize text detector
     reader = easyocr.Reader([language], gpu=True)
 
@@ -25,7 +12,7 @@ def detect_text(image_path, language='en', threshold=0.25):
     # Detect text on the image
     text = reader.readtext(img)
 
-      # Draw bounding boxes and text (if above threshold)
+    # Draw bounding boxes and text (if above threshold)
     for t_, t in enumerate(text):
         bbox, text, score = t
 
