@@ -1,26 +1,22 @@
 import cv2
 import easyocr
 import numpy as np
+import time
 
-def detect_text(image_path, language='en', threshold=0.25):
-    # Initialize text detector
+def detect_text(image_path, language='en', threshold=0.25, min_text_length=3):  
     reader = easyocr.Reader([language], gpu=True)
-
-    # Load the image
-    img = cv2.imread(image_path)
-
-    # Detect text on the image
+    start_time = time.time()
+    if isinstance(image_path, str):
+        img = cv2.imread(image_path)
+    else:
+        img = image_path
     text = reader.readtext(img)
+    detected_text = []
 
-    # Draw bounding boxes and text (if above threshold)
+    processing_time = float(time.time() - start_time)
     for t_, t in enumerate(text):
         bbox, text, score = t
+        if score > threshold and len(text) >= min_text_length:
 
-        if score > threshold:
-            cv2.rectangle(img, (int(bbox[0][0]), int(bbox[0][1])), (int(bbox[2][0]), int(bbox[2][1])), (0, 255, 0), 2)
-            cv2.putText(img, text, (int(bbox[0][0]), int(bbox[0][1]) - 5), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-
-    # Display the image with detected text
-    cv2.imshow('Text Detection Result', img)
-    cv2.waitKey(0)  # Wait for a key press to close the window
-    cv2.destroyAllWindows()
+            detected_text.append({'bbox': bbox, 'text': text, 'score': score})
+    return processing_time, detected_text
