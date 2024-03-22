@@ -106,7 +106,7 @@ def main():
                         x1, y1, x2, y2 = item['bbox']
                         image_with_boxes = cv2.rectangle(image_with_boxes, (int(x1[0]), int(y1[1])), (int(x2[0]), int(y2[1])), (0, 255, 0), 2)
                     image_with_boxes = cv2.cvtColor(image_with_boxes, cv2.COLOR_BGR2RGB)
-                    st.image(image_with_boxes, channels="RGB", caption="Image with Detected Text(s)")
+                    st.image(image_with_boxes, caption="Image with Detected Text(s)")
                 df = pd.DataFrame(text_data)[['text', 'score']]
                 df.columns = ["Detected Text", "Confidence Score"]
                 df = df.sort_values(by='Confidence Score', ascending=False, ignore_index=True)
